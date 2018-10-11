@@ -21,6 +21,8 @@ import static org.junit.Assert.assertEquals;
 @DataMongoTest
 public class UnitOfMeasureRepositoryIT {
 
+    public static final String TEASPOON = "Teaspoon";
+    public static final String CUP = "Cup";
     @Autowired
     UnitOfMeasureRepository unitOfMeasureRepository;
 
@@ -45,17 +47,17 @@ public class UnitOfMeasureRepositoryIT {
     @Test
     public void findByDescription() throws Exception {
 
-        Optional<UnitOfMeasure> uomOptional = unitOfMeasureRepository.findByDescription("Teaspoon");
+        Optional<UnitOfMeasure> uomOptional = unitOfMeasureRepository.findByDescription(TEASPOON);
 
-        assertEquals("Teaspoon", uomOptional.get().getDescription());
+        assertEquals(TEASPOON, uomOptional.get().getDescription());
     }
 
     @Test
     public void findByDescriptionCup() throws Exception {
 
-        Optional<UnitOfMeasure> uomOptional = unitOfMeasureRepository.findByDescription("Cup");
+        Optional<UnitOfMeasure> uomOptional = unitOfMeasureRepository.findByDescription(CUP);
 
-        assertEquals("Cup", uomOptional.get().getDescription());
+        assertEquals(CUP, uomOptional.get().getDescription());
     }
 
 }
