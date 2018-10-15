@@ -16,13 +16,10 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by jt on 6/17/17.
  */
-
 @RunWith(SpringRunner.class)
 @DataMongoTest
 public class UnitOfMeasureRepositoryIT {
 
-    public static final String TEASPOON = "Teaspoon";
-    public static final String CUP = "Cup";
     @Autowired
     UnitOfMeasureRepository unitOfMeasureRepository;
 
@@ -35,11 +32,11 @@ public class UnitOfMeasureRepositoryIT {
     @Before
     public void setUp() throws Exception {
 
+        recipeRepository.deleteAll();
         unitOfMeasureRepository.deleteAll();
         categoryRepository.deleteAll();
-        recipeRepository.deleteAll();
 
-        RecipeBootstrap recipeBootstrap = new RecipeBootstrap(categoryRepository,recipeRepository,unitOfMeasureRepository);
+        RecipeBootstrap recipeBootstrap = new RecipeBootstrap(categoryRepository, recipeRepository, unitOfMeasureRepository);
 
         recipeBootstrap.onApplicationEvent(null);
     }
@@ -47,17 +44,17 @@ public class UnitOfMeasureRepositoryIT {
     @Test
     public void findByDescription() throws Exception {
 
-        Optional<UnitOfMeasure> uomOptional = unitOfMeasureRepository.findByDescription(TEASPOON);
+        Optional<UnitOfMeasure> uomOptional = unitOfMeasureRepository.findByDescription("Teaspoon");
 
-        assertEquals(TEASPOON, uomOptional.get().getDescription());
+        assertEquals("Teaspoon", uomOptional.get().getDescription());
     }
 
     @Test
     public void findByDescriptionCup() throws Exception {
 
-        Optional<UnitOfMeasure> uomOptional = unitOfMeasureRepository.findByDescription(CUP);
+        Optional<UnitOfMeasure> uomOptional = unitOfMeasureRepository.findByDescription("Cup");
 
-        assertEquals(CUP, uomOptional.get().getDescription());
+        assertEquals("Cup", uomOptional.get().getDescription());
     }
 
 }

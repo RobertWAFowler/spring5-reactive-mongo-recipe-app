@@ -9,14 +9,13 @@ import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 
 @RunWith(SpringRunner.class)
 @DataMongoTest
 public class UnitOfMeasureReactiveRepositoryTest {
 
-
     public static final String EACH = "Each";
+
     @Autowired
     UnitOfMeasureReactiveRepository unitOfMeasureReactiveRepository;
 
@@ -26,28 +25,28 @@ public class UnitOfMeasureReactiveRepositoryTest {
     }
 
     @Test
-    public void testRecipeSave() throws Exception {
-        UnitOfMeasure unitOfMeasure = new UnitOfMeasure();
-        unitOfMeasure.setDescription(EACH);
+    public void testSaveUom() throws Exception {
+        UnitOfMeasure uom = new UnitOfMeasure();
+        uom.setDescription(EACH);
 
-        unitOfMeasureReactiveRepository.save(unitOfMeasure).block();
+        unitOfMeasureReactiveRepository.save(uom).block();
 
         Long count = unitOfMeasureReactiveRepository.count().block();
 
         assertEquals(Long.valueOf(1L), count);
+
     }
 
     @Test
     public void testFindByDescription() throws Exception {
-        UnitOfMeasure unitOfMeasure = new UnitOfMeasure();
-        unitOfMeasure.setDescription(EACH);
+        UnitOfMeasure uom = new UnitOfMeasure();
+        uom.setDescription(EACH);
 
-        unitOfMeasureReactiveRepository.save(unitOfMeasure).block();
+        unitOfMeasureReactiveRepository.save(uom).block();
 
-        UnitOfMeasure fetchedUnitOfMeasure = unitOfMeasureReactiveRepository.findByDescription(EACH).block();
+        UnitOfMeasure fetchedUOM = unitOfMeasureReactiveRepository.findByDescription(EACH).block();
 
-        assertNotNull(fetchedUnitOfMeasure);
-        assertEquals(EACH,fetchedUnitOfMeasure.getDescription());
+        assertEquals(EACH, fetchedUOM.getDescription());
+
     }
-
 }

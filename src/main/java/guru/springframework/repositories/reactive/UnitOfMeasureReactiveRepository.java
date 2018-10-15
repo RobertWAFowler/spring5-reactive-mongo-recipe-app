@@ -5,9 +5,9 @@ import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 import reactor.core.publisher.Mono;
 
 /**
- * Created by robertf on 2018/10/09
+ * Created by jt on 8/17/17.
  */
 public interface UnitOfMeasureReactiveRepository extends ReactiveMongoRepository<UnitOfMeasure, String> {
-    Mono<UnitOfMeasure> findByDescription(String description);
 
+    Mono<UnitOfMeasure> findByDescription(String description);
 }

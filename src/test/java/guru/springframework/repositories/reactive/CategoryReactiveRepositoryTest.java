@@ -16,7 +16,6 @@ import static org.junit.Assert.assertNotNull;
 public class CategoryReactiveRepositoryTest {
 
     @Autowired
-
     CategoryReactiveRepository categoryReactiveRepository;
 
     @Before
@@ -25,9 +24,9 @@ public class CategoryReactiveRepositoryTest {
     }
 
     @Test
-    public void testCategorySave() throws Exception {
-        Category category= new Category();
-
+    public void testSave() throws Exception {
+        Category category = new Category();
+        category.setDescription("Foo");
 
         categoryReactiveRepository.save(category).block();
 
@@ -41,10 +40,10 @@ public class CategoryReactiveRepositoryTest {
         Category category = new Category();
         category.setDescription("Foo");
 
-        categoryReactiveRepository.save(category).block();
+        categoryReactiveRepository.save(category).then().block();
 
-        Category fetchedCategory = categoryReactiveRepository.findByDescription("Foo").block();
+        Category fetchedCat = categoryReactiveRepository.findByDescription("Foo").block();
 
-        assertNotNull(fetchedCategory);
+        assertNotNull(fetchedCat.getId());
     }
 }
