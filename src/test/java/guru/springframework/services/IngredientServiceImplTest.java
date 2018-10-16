@@ -96,8 +96,6 @@ public class IngredientServiceImplTest {
         command.setUom(new UnitOfMeasureCommand());
         command.getUom().setId("1234");
 
-        Optional<Recipe> recipeOptional = Optional.of(new Recipe());
-
         Recipe savedRecipe = new Recipe();
         savedRecipe.addIngredient(new Ingredient());
         savedRecipe.getIngredients().iterator().next().setId("3");
